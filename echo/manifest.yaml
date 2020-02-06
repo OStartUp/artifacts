@@ -1,0 +1,44 @@
+---
+# Source: echo-chart/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: echo-echo-chart
+  labels:
+
+    helm.sh/chart: echo-chart-0.1.0
+    app.kubernetes.io/name: echo-chart
+    app.kubernetes.io/instance: echo
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: echo-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo
+spec:
+  selector:
+    app: echo-deploy
+  ports:
+    - port: 80
+      targetPort: 5000
+---
+# Source: echo-chart/templates/deployment.yaml
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: echo
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: echo-deploy
+    spec:
+      containers:
+        - name: echo-server
+          image: marcecaro/echo@sha256:3a48933915d3af371e116987cf67d2ee580551640ac8006459c73c2075599c32
+          imagePullPolicy: Always
+          # ports:
+          # - containerPort: 5000
