@@ -1,0 +1,44 @@
+---
+# Source: pet-chart/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pet-pet-chart
+  labels:
+
+    helm.sh/chart: pet-chart-0.1.0
+    app.kubernetes.io/name: pet-chart
+    app.kubernetes.io/instance: pet
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: pet-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: pet
+spec:
+  selector:
+    app: pet-deploy
+  ports:
+    - port: 80
+      targetPort: 5000
+---
+# Source: pet-chart/templates/deployment.yaml
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: pet-deploy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pet-deploy
+    spec:
+      containers:
+        - name: pet-server
+          image: marcecaro/pet@sha256:a74ab294552df81299ae64360428db06fbaeb09f374e27ac48f44566914918b3
+          imagePullPolicy: Always
+          # ports:
+          # - containerPort: 5000
