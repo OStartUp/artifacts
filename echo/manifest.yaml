@@ -42,3 +42,19 @@ spec:
           imagePullPolicy: Always
           # ports:
           # - containerPort: 5000
+---
+# Source: echo-chart/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /echo
+        backend:
+          serviceName: echo
+          servicePort: 80
