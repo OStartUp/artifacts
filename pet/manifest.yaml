@@ -30,7 +30,7 @@ kind: Deployment
 metadata:
   name: pet-deploy
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: pet-server
-          image: marcecaro/pet@sha256:eb640964ab0d6a13da956987ea2873446295a8c8686da21bfff32d8dcd45de4f
+          image: marcecaro/pet@sha256:07a9f0006450c000e52a9af92992e63867f681a221e8e60f50744a39a363f095
           imagePullPolicy: Always
           # ports:
           # - containerPort: 5000
