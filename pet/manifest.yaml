@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: pet-server
-          image: marcecaro/pet@sha256:07a9f0006450c000e52a9af92992e63867f681a221e8e60f50744a39a363f095
+          image: marcecaro/pet@sha256:c123fc9256dcdb941f542adc3d22461fffd6978b4b6f72d768bcbf2d5b589cfc
           imagePullPolicy: Always
           # ports:
           # - containerPort: 5000
