@@ -30,7 +30,7 @@ kind: Deployment
 metadata:
   name: pet-deploy
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
