@@ -1,0 +1,60 @@
+---
+# Source: reflector-chart/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: reflector-reflector-chart
+  labels:
+
+    helm.sh/chart: reflector-chart-0.1.0
+    app.kubernetes.io/name: reflector-chart
+    app.kubernetes.io/instance: reflector
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: reflector-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo
+spec:
+  selector:
+    app: echo-deploy
+  ports:
+    - port: 80
+      targetPort: 5000
+---
+# Source: reflector-chart/templates/deployment.yaml
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: reflector
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reflector-deploy
+    spec:
+      containers:
+        - name: reflector-server
+          image: marcecaro/reflector@sha256:ffd6c863c2f661bf699ca3408595c194f35840e94e21bdf14f566af0ff924849
+          imagePullPolicy: Always
+          # ports:
+          # - containerPort: 5000
+---
+# Source: reflector-chart/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: reflector
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /reflector
+        backend:
+          serviceName: reflector
+          servicePort: 80
