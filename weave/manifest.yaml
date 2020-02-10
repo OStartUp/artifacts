@@ -324,11 +324,11 @@ spec:
 ---
 # Source: weave-chart/templates/ingress.yaml
 apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
+kind: git
 metadata:
   name: weave
-  #annotations:
-  #  nginx.ingress.kubernetes.io/rewrite-target: /
+  annotations:
+   nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - http:
@@ -342,7 +342,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "weave-ui-test-si4ml"
+  name: "weave-ui-test-ew9un"
   annotations:
     "helm.sh/hook": test-success
   labels:    
