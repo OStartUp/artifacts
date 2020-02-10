@@ -331,10 +331,10 @@ metadata:
 #    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - http:
+  - host: weave
+    http:
       paths:
       - path: /
-        host: weave
         backend:
           serviceName: weave-weave-chart
           servicePort: 80
@@ -343,7 +343,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "weave-ui-test-f2xrq"
+  name: "weave-ui-test-7j2w7"
   annotations:
     "helm.sh/hook": test-success
   labels:    
