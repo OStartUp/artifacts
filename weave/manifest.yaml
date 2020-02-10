@@ -324,7 +324,7 @@ spec:
 ---
 # Source: weave-chart/templates/ingress.yaml
 apiVersion: networking.k8s.io/v1beta1
-kind: git
+kind: Ingress
 metadata:
   name: weave
   annotations:
@@ -342,7 +342,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "weave-ui-test-ew9un"
+  name: "weave-ui-test-av3wv"
   annotations:
     "helm.sh/hook": test-success
   labels:    
