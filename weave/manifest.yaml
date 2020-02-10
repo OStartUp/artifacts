@@ -322,11 +322,27 @@ spec:
           resources:
             null
 ---
+# Source: weave-chart/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: weave
+  #annotations:
+  #  nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /weave
+        backend:
+          serviceName: weave-weave-chart
+          servicePort: 80
+---
 # Source: weave-chart/charts/weave-scope/templates/weave-scope-tests.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "weave-ui-test-u9co5"
+  name: "weave-ui-test-si4ml"
   annotations:
     "helm.sh/hook": test-success
   labels:    
@@ -364,25 +380,4 @@ spec:
       name: weave-scope-weave-tests
   - name: tools
     emptyDir: {}
-  restartPolicy: Never
----
-# Source: weave-chart/templates/tests/test-connection.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: "weave-weave-chart-test-connection"
-  labels:
-    helm.sh/chart: weave-chart-0.1.0
-    app.kubernetes.io/name: weave-chart
-    app.kubernetes.io/instance: weave
-    app.kubernetes.io/version: "1.16.0"
-    app.kubernetes.io/managed-by: Helm
-  annotations:
-    "helm.sh/hook": test-success
-spec:
-  containers:
-    - name: wget
-      image: busybox
-      command: ['wget']
-      args: ['weave-weave-chart:80']
   restartPolicy: Never
