@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: reflector-server
-          image: marcecaro/reflector@sha256:0902b2dfb1f3e26af4aab186ea3963495720a082beab9a5907a2fd0c0494c129
+          image: marcecaro/reflector@sha256:e26568fd7cdbbac891bb834280cd91aaf39b390290f13876feeb8d4886c09f00
           imagePullPolicy: Always
           # ports:
           # - containerPort: 5000
