@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: echo-server
-          image: marcecaro/echo@sha256:3f2175e4b3bc4daf867b17b8af349d11af2ff638c6c365b27eb5ca31199a2eff
+          image: marcecaro/echo@sha256:6760f2cbc7bdb9439ac9af31ba6bd5244d7bfc72e02d14e38b3376e534fd4efc
           imagePullPolicy: Always
           # ports:
           # - containerPort: 5000
