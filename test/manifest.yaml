@@ -1,0 +1,60 @@
+---
+# Source: test-chart/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: test-test-chart
+  labels:
+
+    helm.sh/chart: test-chart-0.1.0
+    app.kubernetes.io/name: test-chart
+    app.kubernetes.io/instance: test
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: test-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo
+spec:
+  selector:
+    app: echo-deploy
+  ports:
+    - port: 80
+      targetPort: 5000
+---
+# Source: test-chart/templates/deployment.yaml
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: test
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: test-deploy
+    spec:
+      containers:
+        - name: echo-server
+          image: marcecaro/test@sha256:9013366e154e4711f3e48d9350664a20e3c01a218a9f020e40705ac71c3b19ea
+          imagePullPolicy: Always
+          # ports:
+          # - containerPort: 5000
+---
+# Source: test-chart/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /test
+        backend:
+          serviceName: test
+          servicePort: 80
