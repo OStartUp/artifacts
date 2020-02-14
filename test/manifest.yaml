@@ -37,8 +37,8 @@ spec:
         app: test-deploy
     spec:
       containers:
-        - name: echo-server
-          image: marcecaro/test@sha256:1a118bef33cbd28019d11e94dc50a183e31eaa1b1f78eeea6adca8d60736c6b7
+        - name: test-server
+          image: marcecaro/test@sha256:224856fdd71a7fa7d59e73a4c591394d3a2e9daef96f379f6eca7bf4ff117262
           imagePullPolicy: Always
           # ports:
           # - containerPort: 5000
@@ -48,13 +48,13 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: test
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - http:
       paths:
-      - path: /test
+      - path: /runtests
         backend:
           serviceName: test
           servicePort: 80
