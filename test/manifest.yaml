@@ -16,10 +16,10 @@ metadata:
 apiVersion: v1
 kind: Service
 metadata:
-  name: echo
+  name: test
 spec:
   selector:
-    app: echo-deploy
+    app: test-deploy
   ports:
     - port: 80
       targetPort: 5000
