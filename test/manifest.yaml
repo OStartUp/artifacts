@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: test-server
-          image: marcecaro/test@sha256:811062295c5f6a00274f557b7725692e8a2041263d1077c19584ccb0161496e8
+          image: marcecaro/test@sha256:7f86135b158bc3ea18d91841857f452a89e9d2a6f4af2240988d412adbb95cc1
           imagePullPolicy: Always
           # ports:
           # - containerPort: 5000
